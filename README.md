@@ -5,3 +5,8 @@
 
 # OVERVIEW
 
+Introducing {USERanalyzer}: a R package aimed for ancient DNA (aDNA) data visualization. USERanalyzer
+provides an RStudio project template to generate reproducible workflows of data visualizations of various 
+summary statistics.
+
+Any scientist working with aDNA analysis 
