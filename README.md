@@ -28,6 +28,15 @@ enhanced detail.
 install.packages("USERanalyzer")
 ```
 
+```r
+library(USERanalyzer)
+```
+# Requirements
+
+The data file should be an excel file with multiple sheets for different summary statistics plots to be generated
+from. The `load_df_use` function will automatically 
+
+
 # Usage
 
 ## 1. Change setting.R file
@@ -45,9 +54,52 @@ aDNA_pal <- c(
   "#A034F0"
   )
 
-# Named vectore for treatment group labels
+# Columns order and names for labeling
+named_columns <- c("TotalReads" = "Total Number of Reads",
+             "ReadsTrim" = "Number of Reads after Trimming",
+             "ReadLenTrim" = "Length of Trimmed Reads",
+             "MappingReads" = "Number of Mapping Reads",
+             "DuplicateReads" = "Number of Duplicate Reads",
+             "UniqueReads" = "Number of Unique Reads",
+             "ReadLengthMean" = "Mean Length of Reads",
+             "AutosomeDepth" = " Autosome Depth",
+             "MTdepth" = "Mitochondiral Depth",
+             "XDepth" = "Chromosome X Depth",
+             "YDepth" = "Chromosome Y Depth",
+             "CtoT5bp1" = "C to T Misincorporation posiiton 1",
+             "CtoT5bp2"= "C to T Misincorporation position 2",
+             "GtoA3bp1" = "G to A Misincorporation position 1",
+             "GtoA3bp2" = "G to A Misincorporation position 2"
+)
+
+# Vector for treatment group labels
 treat_labs <- c(
                 "U_2.5" = "2.5mL USER",
                 "U_10" = "10mL USER",
-                "E" = "Non USER")
+                "E" = "Non USER"
+)
 ```
+## 2. Load data from excel file
+
+Using the `load_df_user` function
+
+```r
+main_data <- load_df_user(data_path)
+```
+
+will create a main dataframe where it contains a list of named dataframes from all the sheets
+within the excel file.
+
+## 3. QC plots from NGS data
+
+First quality control plots to ensure no errors/problems occured during library preparation and sequencing.
+
+Single summary statistic variable
+```r
+plot_qc(complete_data, variable_col = "ReadsTrim")
+```
+All summary statistic variables
+```r
+
+```
+
