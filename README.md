@@ -41,7 +41,7 @@ from. The `load_df_use` function will automatically
 
 ## 1. Change setting.R file
 
-You can customize the color palette, column names, treatment groups, etc...
+In the `settings.R` file, you can customize the color palette, column names, treatment groups, etc.
 
 ```r
 # Color palette
