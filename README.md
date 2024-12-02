@@ -12,7 +12,8 @@ status](https://www.r-pkg.org/badges/version/USERanalyzer)](https://CRAN.R-proje
 # OVERVIEW
 
 Introducing `{USERanalyzer}`: an R package designed for the visualization of ancient DNA (aDNA) data that use [Uracil-Specific 
-Excision Reagent (USER)](https://www.neb.com/en/products/m5505-user-enzyme?srsltid=AfmBOoordQF4RPNq2kBKbjeCeduoI3ZSdnunjRjbHpMAlWL1RzIOoMD7) enzymes during library preparations. `{USERanalyzer}` offers an
+Excision Reagent (USER)](https://www.neb.com/en/products/m5505-user-enzyme?srsltid=AfmBOoordQF4RPNq2kBKbjeCeduoI3ZSdnunjRjbHpMAlWL1RzIOoMD7) 
+enzyme treatment during library preparations. `{USERanalyzer}` offers an
 RStudio project template to facilitate the creation of reproducible workflows for visualizing various summary statistics.
 
 This package is tailored for scientists working with aDNA analysis, enabling them to seamlessly process next-generation 
@@ -27,6 +28,6 @@ enhanced detail.
 install.packages("USERanalyzer")
 ```
 
-#Usage
+# Usage
 
 ## 1. Change setting.R file
