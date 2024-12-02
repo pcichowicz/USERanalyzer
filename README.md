@@ -31,3 +31,23 @@ install.packages("USERanalyzer")
 # Usage
 
 ## 1. Change setting.R file
+
+You can customize the color palette, column names, treatment groups, etc...
+
+```r
+# Color palette
+aDNA_pal <- c(
+  "#440154FF",
+  "#FDE725FF",
+  "#159090",
+  "#FF8C00",
+  "#8FD744FF",
+  "#A034F0"
+  )
+
+# Named vectore for treatment group labels
+treat_labs <- c(
+                "U_2.5" = "2.5mL USER",
+                "U_10" = "10mL USER",
+                "E" = "Non USER")
+```
