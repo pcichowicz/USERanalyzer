@@ -136,7 +136,7 @@ will result in the following plot.
 ![plot_raincloud](https://github.com/user-attachments/assets/0231fe8a-3c43-434c-a8f1-f958955194a5)
 
 
-## aDNA damage verifivation
+## aDNA damage verification
 
 Using the [mapDamage](https://ginolhac.github.io/mapDamage/) tool for quantifying damage patterns in ancient DNA sequences, you
 can plot both 5' and 3' ends of C -> T and G -> A transitions. You can plot individual mis-incorporation plots or many samples
@@ -149,6 +149,7 @@ plot_mapDamage(main_data, "sample_1")
 All samples store in list object and can access them by indexing
 plot_mapDamage(main_data)
 ```
+![plot_mapDamage](https://github.com/user-attachments/assets/f25019d3-1146-40fb-bfcb-a23b18193077)
 
 
 
