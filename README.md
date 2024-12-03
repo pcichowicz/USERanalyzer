@@ -149,7 +149,8 @@ plot_mapDamage(main_data, "sample_1")
 All samples store in list object and can access them by indexing
 plot_mapDamage(main_data)
 ```
-![plot_mapDamage](https://github.com/user-attachments/assets/f25019d3-1146-40fb-bfcb-a23b18193077)
+![plot_mapDamage](https://github.com/user-attachments/assets/6460b17e-b6d7-420a-9483-250e76ef73eb)
+
 
 
 
