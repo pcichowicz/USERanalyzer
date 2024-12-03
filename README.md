@@ -1,5 +1,7 @@
 # USERanalyzer
 
+<!-- badges: start -->
+
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 
 [![CRAN
@@ -8,6 +10,7 @@ status](https://www.r-pkg.org/badges/version/USERanalyzer)](https://CRAN.R-proje
 
 ![Markdown](https://img.shields.io/badge/markdown-%23000000.svg?style=for-the-badge&logo=markdown&logoColor=white) ![R](https://img.shields.io/badge/r-%23276DC3.svg?style=for-the-badge&logo=r&logoColor=white)
 
+<!-- badges: end -->
 
 # OVERVIEW
 
@@ -110,6 +113,10 @@ sapply(col_num, simplify = FALSE ,function(col_name) {
  plot_qc(complete_data, variable_col = col_name)
 })
 ```
+![QC_plot-ReadLenTrim](https://github.com/user-attachments/assets/60e35501-5343-4614-b3f0-87f83ba920bb)
+![QC_plot-ReadTrim_adv](https://github.com/user-attachments/assets/334a782e-c01f-409a-83cc-82d1de948d16)
+
+
 ---- insert plots qc_plot ----
 
 In order to visualize treatment group QC, `plot_qc_group` is used in the same manner.
@@ -131,6 +138,18 @@ will result in the following plot.
 
 ## aDNA damage verifivation
 
-Using the [mapDamage](https://ginolhac.github.io/mapDamage/) tool for accessing aDNA damage,
+Using the [mapDamage](https://ginolhac.github.io/mapDamage/) tool for quantifying damage patterns in ancient DNA sequences, you
+can plot both 5' and 3' ends of C -> T and G -> A transitions. You can plot individual mis-incorporation plots or many samples
+at the same time.
+
+```r
+# Individual/single sample
+plot_mapDamage(main_data, "sample_1")
+
+All samples store in list object and can access them by indexing
+plot_mapDamage(main_data)
+```
+
+
 
 
