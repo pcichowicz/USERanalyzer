@@ -146,10 +146,24 @@ at the same time.
 # Individual/single sample
 plot_mapDamage(main_data, "sample_1")
 
-All samples store in list object and can access them by indexing
+# All samples store in list object and can access them by indexing
 plot_mapDamage(main_data)
 ```
 ![plot_mapDamage](https://github.com/user-attachments/assets/6460b17e-b6d7-420a-9483-250e76ef73eb)
+
+### mapDamage parameters used for validating aDNA damage
+
+**Lambda**, the probability of termating an overhang.
+**DeltaD**, the cytosine deamination probability in double strand context.
+**DeltaS**, the cytosine deamination probability in single strand context.
+**Theta**, the mean difference rate between the reference and the sequenced sample not due to DNA damage.
+
+![mapDamage_parameter-Lambda](https://github.com/user-attachments/assets/23eb2c68-15b4-48f0-af07-8e6e2ba46f18)
+![mapDamage_parameter-Lambda](https://github.com/user-attachments/assets/40902fa3-4d3b-445b-9d81-2022e45e4fa6)
+![mapDamage_parameter-Lambda](https://github.com/user-attachments/assets/db3ff5d9-0bc5-4522-a9b5-a155ea459dab)
+![mapDamage_parameter-Lambda](https://github.com/user-attachments/assets/024d00dd-c16d-4dbb-827b-aeb9372f382a)
+
+
 
 
 
