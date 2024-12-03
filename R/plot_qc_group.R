@@ -19,9 +19,10 @@
 plot_qc_group <- function(data_frame_user,
                     qc_sheet = "Statistics",
                     variable_col,
-                    treatment_group = TRUE
+                    treatment_group = TRUE,
+                    col_pal = aDNA_pal
 ) {
-
+  treatment_colors <- setNames(col_pal[c(1,2,3)], c("E", "U_10", "U_2.5"))
 
   # Create density data frame (grouped by Treatment)
   # Calculate means for each Treatment group, density data and mean value at y
@@ -47,9 +48,9 @@ plot_qc_group <- function(data_frame_user,
                        breaks = pretty(data_frame_user[[qc_sheet]][[variable_col]], n = 10),
                        guide = guide_axis(angle = 45)) +
     theme(legend.position = c(.9,.75)) +
-    scale_fill_manual(values = darken(c("#440154FF", "#8FD744FF", "#FF8C00"), 0.4),
+    scale_fill_manual(values = darken(treatment_colors, 0.05),
                       labels = treat_labs) +
-    scale_color_manual(values = darken(c("#440154FF", "#8FD744FF", "#FF8C00")), 0.4) +
+    scale_color_manual(values = darken(treatment_colors, 0.05)) +
     guides(color = "none")
 
 

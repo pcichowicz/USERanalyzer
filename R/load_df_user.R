@@ -3,7 +3,7 @@
 #' @description
 #' This function takes in the excel path and creates a list of data frames from
 #' the sheet names and updates columns to have correct types
-#' @param excel_path Path to the excel  file
+#' @param excel_path Path to the excel file
 #'
 #' @importFrom  magrittr %>%
 #' @importFrom dplyr across all_of mutate

@@ -30,7 +30,8 @@ plot_mapDamage <- function(dataframe_data,
                            treatment = "Treatment",
                            col_pal = aDNA_pal) {
 
-  # If sample_name = FALSE, split data by samp (sample names)
+  # Index into mapdamge dataframe and create new dataframe containing individual samples
+  # If sample_name = FALSE, split data by `sample_column`
 
   if (isFALSE(sample_name)) {
     split_samples <- split(dataframe_data[[mapdamage_data]],
@@ -40,19 +41,22 @@ plot_mapDamage <- function(dataframe_data,
       list(dataframe_data[[mapdamage_data]][dataframe_data[[mapdamage_data]][[sample_column]] == sample_name, ]),
       sample_name
 
-      )
+    )
   }
+
+  # Create named vector for setting Treatment colors
 
   treatment_colors <- setNames(col_pal[c(1,2,3)], c("E", "U_10", "U_2.5"))
 
-  # Determine y_limits for y axis symmetry for individual samples
+  # Determine y_limits for y axis symmetry for each individual samples
 
   y_limit <- lapply(split_samples, function(samp_name) {
     y_axis_range <- round(range(pretty(samp_name[["C_T5p"]]),
-          pretty(samp_name[["G_A3p"]])), 2)
+                                pretty(samp_name[["G_A3p"]])), 2)
     c(y_axis_range[1], ceiling(y_axis_range[2] / 0.05) * 0.05)
   })
 
+  # Dataframe containing list of individual ggplots
   plot_list <- sapply(names(split_samples), simplify = FALSE, function(sample_id){
 
     anno_df <- split_samples[[sample_id]] %>%
@@ -61,38 +65,23 @@ plot_mapDamage <- function(dataframe_data,
 
     y_limit <- y_limit[[sample_id]]
 
-    # y_breaks_ct <- unique(c(y_limit, round(anno_df %>% pull(C_T5p), 2)))
-    # y_breaks_ga <- unique(c(pretty(y_limit), round(anno_df %>% pull(G_A3p), 2)))
+    pos1_diff <- split_samples[[sample_id]]
 
-    # y_colors_ct <- setNames(rep("black", length(y_breaks_ct)), y_breaks_ct)
-    # y_colors_ga <- setNames(rep("black", length(y_breaks_ga)), y_breaks_ga)
-
-    # special_ct <- round(anno_df$C_T5p, 2)
-    # special_ga <- round(anno_df$G_A3p, 2)
-
-    # y_colors_ct[as.character(special_ct)] <- darken(treatment_colors[anno_df$Treatment], 0.15)
-    # y_colors_ga[as.character(special_ga)] <- darken(treatment_colors[anno_df$Treatment], 0.15)
-
-
-    # Create difference of C_T position 1 values df
-    # difference_df <- split_samples %>%
-    #   filter(pos == 1)
-
-
+    # ggplot for C to T transitions, 5 prime end
     C_T <- ggplot(
-        data = split_samples[[sample_id]],
+      data = split_samples[[sample_id]],
+      aes(
+        x = pos,
+        y = C_T5p
+      )
+    ) +
+      geom_line(
         aes(
-          x = pos,
-          y = C_T5p
-        )
+          group = .data[[treatment]],
+          color = .data[[treatment]]
+        ),
+        linewidth = 1
       ) +
-        geom_line(
-          aes(
-            group = .data[[treatment]],
-            color = .data[[treatment]]
-          ),
-          linewidth = 1
-        ) +
       annotate("path",
                x = c(2,4,4,2),
                y =c(anno_df %>%
@@ -129,119 +118,126 @@ plot_mapDamage <- function(dataframe_data,
       annotate("text",
                x = 6,
                y = (anno_df %>%
-                 filter(Treatment == "E") %>%
-                 pull(C_T5p) + anno_df %>%
-                 filter(Treatment == "U_2.5") %>%
-                 pull(C_T5p)) / 2,
-               label = "2.5") +
+                      filter(Treatment == "E") %>%
+                      pull(C_T5p) + anno_df %>%
+                      filter(Treatment == "U_2.5") %>%
+                      pull(C_T5p)) / 2,
+               label = round(((anno_df[["C_T5p"]][3] - anno_df[["C_T5p"]][1]) / anno_df[["C_T5p"]][3]) * 100, digits = 1)
+               ) +
       annotate("text",
                x = 6,
                y = (anno_df %>%
-                 filter(Treatment == "U_2.5") %>%
-                 pull(C_T5p) + anno_df %>%
-                 filter(Treatment == "U_10") %>%
-                 pull(C_T5p)) / 2,
-               label = "10") +
-        theme_classic() +
-        scale_x_continuous(
-          limits = c(1,25),
-          breaks = c(seq(1,25,
-                         by = 1))) +
-        scale_y_continuous(limits = y_limit,
-                           breaks = seq(y_limit[1], y_limit[2], by = 0.05),
-                           # labels = function(break_values) {
-                           #   sapply(break_values, function(value) {
-                           #     color <- y_colors_ct[as.character(value)]
-                           #     paste0("<span style='color:", color, "'>", value, "</span>")
-                           #   })
-                           # }
-        ) +
-        theme(legend.position = "none",
-              axis.title.x = element_text(size = 15, margin = margin(12,0,0,0)),
-              axis.text.x = element_text(
-                                         size = 10,
-                                         angle = 90),
-              axis.title.y = element_text(size = 15, margin = margin(0,12,0,0)),
-              axis.text.y = ggtext::element_markdown()
-               ) +
-        scale_color_manual(values = darken(col_pal, 0.15)) +
-        labs(x = "5' Position",
-             y = "Frequency of C to T")
+                      filter(Treatment == "U_2.5") %>%
+                      pull(C_T5p) + anno_df %>%
+                      filter(Treatment == "U_10") %>%
+                      pull(C_T5p)) / 2,
+              label = round(((anno_df[["C_T5p"]][3] - anno_df[["C_T5p"]][2]) / anno_df[["C_T5p"]][3]) * 100, digits = 1)) +
+      theme_classic() +
+      scale_x_continuous(
+        limits = c(1,25),
+        breaks = c(seq(1,25, by = 1))
+      ) +
+      scale_y_continuous(limits = y_limit,
+                         breaks = seq(y_limit[1], y_limit[2], by = 0.05)
+      ) +
+      theme(legend.position = "none",
+            axis.title.x = element_text(size = 15, margin = margin(12,0,0,0)),
+            axis.text.x = element_text(
+              angle = 90),
+            axis.title.y = element_text(size = 15, margin = margin(0,12,0,0)),
+            axis.text.y = ggtext::element_markdown()
+      ) +
+      scale_color_manual(values = darken(col_pal, 0.15)) +
+      labs(x = "5' Position",
+           y = "Frequency of C to T")
 
-    # 3' G > A transitions, with reversed x-axis
+    # ggplot for G to A transitions, 3 prime end, with reversed x-axis
     G_A <- ggplot(
       data = split_samples[[sample_id]],
-      aes(
-        x = pos,
-        y = G_A3p
+      aes(x = pos,
+          y = G_A3p
       )
     ) +
       geom_line(
-        aes(
-          group = .data[[treatment]],
-          color = .data[[treatment]]
+        aes(group = .data[[treatment]],
+            color = .data[[treatment]]
         ),
         linewidth = 1
       ) +
-      # geom_label(
-      #   data = split_samples[[sample_id]] %>%
-      #     filter(pos == 1),
-      #   aes(
-      #     label = round(G_A3p, 3),
-      #     group = .data[[treatment]],
-      #     color = .data[[treatment]]
-      #   ),
-      #   nudge_x = -2,
-      #   nudge_y = 0.01
-      # ) +
-      # annotate(
-      #   'curve',
-      #   x = 1,
-      #   y = 0.02,
-      #   xend = 1,
-      #   yend = 0.25,
-      #   linewidth = 1,
-      #   curvature = -0.2,
-      #   alpha = 0.5
-      # ) +
-      # annotate(
-      #   'curve',
-      #   x = 1,
-      #   y = 0.072,
-      #   xend = 1,
-      #   yend = 0.25,
-      #   linewidth = 1,
-      #   linetype = "dashed",
-      #   curvature = -0.2,
-      #   alpha = + 0.5
-      # ) +
       theme_classic() +
       theme(legend.position = "none",
             axis.title.x = element_text(size = 15, margin = margin(12,0,0,0)),
             axis.title.y = element_text(size = 15, margin = margin(0,0,0,-12)),
-            axis.text.y = ggtext::element_markdown(),
-            axis.text.x = element_text(angle = 90)) +
-      scale_x_reverse(breaks = c(seq(1,25, by = 1))) +
+            # axis.text.y = ggtext::element_markdown(),
+            axis.text.x = element_text(angle = 90)
+            ) +
+      scale_x_reverse(breaks = c(seq(1,25, by = 1))
+                      ) +
       scale_y_continuous(position = "right",
                          limits = y_limit,
                          breaks = seq(y_limit[1], y_limit[2], by = 0.05)
-                         # breaks = y_breaks_ga,
-                         # labels = function(break_values) {
-                         #   sapply(break_values, function(value) {
-                         #     color <- y_colors_ga[as.character(value)]
-                         #     paste0("<span style='color:", color, "'>", value, "</span>")
-                         #   })
-                         # }
-    ) +
+                         ) +
       scale_color_manual(values = darken(col_pal, 0.15)) +
       theme(legend.position = "none") +
       labs(x = "3' Position",
-           y = "Frequency of G to A")
+           y = "Frequency of G to A") +
+    annotate("path",
+             x = c(2,4,4,2),
+             y =c(anno_df %>%
+                    filter(Treatment == "E") %>%
+                    pull(G_A3p),
+                  anno_df %>%
+                    filter(Treatment == "E") %>%
+                    pull(G_A3p),
+                  anno_df %>%
+                    filter(Treatment == "U_2.5") %>%
+                    pull(G_A3p),
+                  anno_df %>%
+                    filter(Treatment =="U_2.5") %>%
+                    pull(G_A3p)),
+             color = "black",
+             size = 1,
+             alpha = 0.5,
+             linetype = "22") +
+      annotate("path",
+               x = c(4, 4, 2),
+               y =c(anno_df %>%
+                      filter(Treatment == "U_2.5") %>%
+                      pull(G_A3p),
+                    anno_df %>%
+                      filter(Treatment == "U_10") %>%
+                      pull(G_A3p),
+                    anno_df %>%
+                      filter(Treatment == "U_10") %>%
+                      pull(G_A3p)),
+               color = "black",
+               size = 1,
+               alpha = 0.25,
+               linetype = "22") +
+      annotate("text",
+               x = 6,
+               y = (anno_df %>%
+                      filter(Treatment == "E") %>%
+                      pull(G_A3p) + anno_df %>%
+                      filter(Treatment == "U_2.5") %>%
+                      pull(G_A3p)) / 2,
+               label = round(((anno_df[["G_A3p"]][3] - anno_df[["G_A3p"]][1]) / anno_df[["G_A3p"]][3]) * 100, digits = 1)
+      ) +
+      annotate("text",
+               x = 6,
+               y = (anno_df %>%
+                      filter(Treatment == "U_2.5") %>%
+                      pull(G_A3p) + anno_df %>%
+                      filter(Treatment == "U_10") %>%
+                      pull(G_A3p)) / 2,
+               label = round(((anno_df[["G_A3p"]][3] - anno_df[["G_A3p"]][2]) / anno_df[["G_A3p"]][3]) * 100, digits = 1)
+      )
 
+    # Merge both 5 and 3 prime ggplots together
     combine_plot <- plot_grid(C_T, G_A,
-              align = "h",
-              axis = "tb",
-              rel_heights = c(1,1))
+                              align = "h",
+                              axis = "tb",
+                              rel_heights = c(1,1))
 
     return(combine_plot)
 

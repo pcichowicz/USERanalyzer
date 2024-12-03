@@ -10,7 +10,7 @@
 #' @return
 #' @export
 
-plot_mapDamage_param <- function(mapdam_params, parameter, metric = "Mean"){
+plot_mapDamage_param <- function(mapdam_params,parameter, metric = "Mean"){
 
   limits <- c(min(mapdam_params[[parameter]]), max(mapdam_params[[parameter]]))
 
@@ -20,7 +20,7 @@ plot_mapDamage_param <- function(mapdam_params, parameter, metric = "Mean"){
              fill = Treatment)) +
     geom_density_ridges(scale = 0.9) +
     scale_y_discrete(labels = treat_labs) +
-    scale_fill_manual(values = darken(aDNA_pal, 0.3)) +
+    scale_fill_manual(values = darken(aDNA_pal, 0.1)) +
     theme_classic() +
     guides(fill = "none")
 

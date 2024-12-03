@@ -162,11 +162,3 @@ plot_mapDamage(main_data)
 ![plot_mapDamage_param-DeltaD](https://github.com/user-attachments/assets/b5483492-5993-4892-b078-31266269dc37)
 ![plot_mapDamage_param-DeltaS](https://github.com/user-attachments/assets/a22c8992-a9d2-42fb-9551-d045e5001f4a)
 ![plot_mapDamage_param-Theta](https://github.com/user-attachments/assets/17745535-ee25-4dd5-b68a-8f307357b6b6)
-
-
-
-
-
-
-
-

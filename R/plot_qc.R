@@ -19,7 +19,7 @@ plot_qc <- function(project_dataframe,
                     qc_sheet = "Statistics",
                     variable_col,
                     qc_fill = "#FF8C00",
-                    qc_type = NULL
+                    qc_type = "basic"
                     ) {
 
   # Create density data frame
@@ -39,7 +39,8 @@ plot_qc <- function(project_dataframe,
     scale_x_continuous(limits = range(pretty(project_dataframe[[qc_sheet]][[variable_col]], n = 11)),
                        breaks = pretty(project_dataframe[[qc_sheet]][[variable_col]], n = 10),
                        guide = guide_axis(angle = 45)) +
-    theme(legend.position = "none")
+    theme(legend.position = "none",
+          axis.title = element_text(size = 13))
 
   # Plot more advanced statistics QC plot, when qc_type != NULL
 
@@ -47,7 +48,7 @@ plot_qc <- function(project_dataframe,
                              y = density_data[["densityframe"]][[1]]$y) %>%
     filter(x >= quantile(project_dataframe[[qc_sheet]][[variable_col]], 0.25) & x <= quantile(project_dataframe[[qc_sheet]][[variable_col]], 0.75))
 
-  if (!is.null(qc_type)) {
+  if (qc_type == "adv") {
     distribution_plot <- distribution_plot +
       geom_area(data = density_fill,
                 aes(x = x,

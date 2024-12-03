@@ -1,8 +1,10 @@
 #' Plots point,density and boxplots side-by-side per treatment
 #'
 #' @param user_dataframe data frame for plotting
+#' @param stats_dataframe dataframe from main dataframe used for statistical plot
 #' @param observation_name Statistical variable for plotting
 #' @param treatment group-by variable for ggplot aesthetics
+#' @param col_pal Color palette to be used for treatment colors
 #' @param ...
 #'
 #' @return ggplot object
@@ -10,28 +12,16 @@
 #'
 #' @examples
 #' raincloud_plot(data_frame, "ReadLenTrim")
-plot_raincloud <- function(user_dataframe, observation_name, treatment = "Treatment", ...) {
-
-  named_columns <- c("TotalReads" = "Total Number of Reads",
-                     "ReadsTrim" = "Number of Reads after Trimming",
-                     "ReadLenTrim" = "Length of Trimmed Reads",
-                     "MappingReads" = "Number of Mapping Reads",
-                     "DuplicateReads" = "Number of Duplicate Reads",
-                     "UniqueReads" = "Number of Unique Reads",
-                     "ReadLengthMean" = "Mean Length of Reads",
-                     "AutosomeDepth" = " Autosome Depth"
-                     )
-  treatment_labels <- c("E" = "Non USER",
-                        "U_10" = "10mL USER",
-                        "U_2.5" = "2.5mL USER")
-
-  pal <- c("#440154FF", "#8FD744FF", "#FF8C00",
-           # "#FDE725FF",
-           "#FF8C00", "#A034F0", "#159090")
+plot_raincloud <- function(user_dataframe,
+                           stats_dataframe = "Statistics",
+                           observation_name,
+                           treatment = "Treatment",
+                           col_pal = aDNA_pal,
+                           ...) {
 
   y_axis_label <- named_columns[observation_name]
 
-  ggplot(data = user_dataframe,
+  ggplot(data = user_dataframe[[stats_dataframe]],
          aes(x = .data[[treatment]],
              y = .data[[observation_name]])) +
     geom_boxplot(
@@ -62,10 +52,10 @@ plot_raincloud <- function(user_dataframe, observation_name, treatment = "Treatm
                                       vjust = 3),
           plot.margin = margin(10,10,10,10)) + # add extra margin space of plot
     labs(y = y_axis_label) +
-    scale_y_continuous(limits = range(pretty(user_dataframe[[observation_name]])),
-                       breaks = pretty(user_dataframe[[observation_name]])) +
-    scale_x_discrete(labels = treatment_labels) +
-    scale_color_manual(values = darken(pal, 0.3), guide = "none") +
-    scale_fill_manual(values = darken(pal,0.3), guide = "none")
+    scale_y_continuous(limits = range(pretty(user_dataframe[[stats_dataframe]][[observation_name]])),
+                       breaks = pretty(user_dataframe[[stats_dataframe]][[observation_name]])) +
+    scale_x_discrete(labels = treat_labs) +
+    scale_color_manual(values = darken(col_pal, 0.05), guide = "none") +
+    scale_fill_manual(values = darken(col_pal,0.05), guide = "none")
 
 }

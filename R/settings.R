@@ -1,3 +1,8 @@
+# Direct path to excel file of data
+data_path <- "/Users/Patrick/Desktop/R projects/Projects/USER_reduction/Data/USER_raw_data.xlsx"
+plot_output <- "/Users/Patrick/Desktop/R projects/Projects/USER_reduction/Plots"
+
+
 qc_names <- c("TotalReads" = "Total Number of Reads",
               "ReadsTrim" = "Number of Reads after Trimming",
               "ReadLenTrim" = "Length of Trimmed Reads",
