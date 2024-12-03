@@ -122,7 +122,8 @@ In order to visualize treatment group QC, `plot_qc_group` is used in the same ma
 ```r
 plot_qc_group(main_data, variable_col = "TotalReads"
 ```
----- insert plots qc_plot_group ----
+![plot_qc_group-ReadLenTrim](https://github.com/user-attachments/assets/61b12b64-a5db-4134-a6e1-6526519c5ebe)
+
 
 Raincloud plots using the `plot_raincloud` can visualize raw data, probability density and other summary statistics (mean, median, confidence
 intervals) in an understandable and flexible format. It combines dot plots, density plot, and box plots into one.
@@ -132,7 +133,8 @@ plot_raincloud(main_data, "ReadLenTrim")
 ```
 will result in the following plot.
 
----- insert raincloud ----
+![plot_raincloud](https://github.com/user-attachments/assets/0231fe8a-3c43-434c-a8f1-f958955194a5)
+
 
 ## aDNA damage verifivation
 
