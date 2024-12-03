@@ -113,11 +113,8 @@ sapply(col_num, simplify = FALSE ,function(col_name) {
  plot_qc(complete_data, variable_col = col_name)
 })
 ```
-![QC_plot-ReadLenTrim](https://github.com/user-attachments/assets/60e35501-5343-4614-b3f0-87f83ba920bb)
-![QC_plot-ReadTrim_adv](https://github.com/user-attachments/assets/334a782e-c01f-409a-83cc-82d1de948d16)
-
-
----- insert plots qc_plot ----
+![plot_qc-ReadLenTrim](https://github.com/user-attachments/assets/5883912b-456f-4d6b-a046-4e4c23ecab17)
+![plot_qc-ReadLenTrim_adv](https://github.com/user-attachments/assets/71326a6a-fe7c-4bb3-85a6-600728e55113)
 
 In order to visualize treatment group QC, `plot_qc_group` is used in the same manner.
 
