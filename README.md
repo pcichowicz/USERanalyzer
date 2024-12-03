@@ -38,12 +38,20 @@ from. The `load_df_use` function will automatically
 
 
 # Usage
+The following steps will guide you to start producing QC plots along with further down analysis. Make sure that
+the required excel file and corresponding sheets are in the correct format.
 
-## 1. Change setting.R file
-
-In the `settings.R` file, you can customize the color palette, column names, treatment groups, etc.
+## Customizing the settings file
+Changing the  `setting.R` file. In the `settings.R` file, you can customize path to excel data file,
+output path for storing results, color palette, column names,treatment groups, etc.
 
 ```r
+#Change/add new meta settings for scripts/functions to use
+
+# path to data, output results
+data_path <- "/path/to/R projects/Projects/USER_reduction/Data/USER_raw_data.xlsx"
+plot_output <- "/path/to/R projects/Projects/USER_reduction/Plots"
+
 # Color palette
 aDNA_pal <- c(
   "#440154FF",
@@ -72,16 +80,11 @@ named_columns <- c("TotalReads" = "Total Number of Reads",
              "GtoA3bp2" = "G to A Misincorporation position 2"
 )
 
-# Vector for treatment group labels
-treat_labs <- c(
-                "U_2.5" = "2.5mL USER",
-                "U_10" = "10mL USER",
-                "E" = "Non USER"
-)
 ```
-## 2. Load data from excel file
 
-Using the `load_df_user` function
+## Loading data and Quality control
+
+Once the settings have been adjusted, you can load data into the R project markdown. Using the `load_df_user` function
 
 ```r
 main_data <- load_df_user(data_path)
@@ -90,16 +93,44 @@ main_data <- load_df_user(data_path)
 will create a main dataframe where it contains a list of named dataframes from all the sheets
 within the excel file.
 
-## 3. QC plots from NGS data
-
-First quality control plots to ensure no errors/problems occured during library preparation and sequencing.
+Next you can plot quality control analysis plots to ensure no errors/problems occured during library preparation and sequencing.
+The following function `qc_plot` does not group the observations based on treatment groups.
 
 Single summary statistic variable
 ```r
-plot_qc(complete_data, variable_col = "ReadsTrim")
+# default plot
+plot_qc(main_data, variable_col = "ReadsTrim")
+
+# advanced plot
+plot_qc(main_data, variable_col = "ReadsTrim, qc_type = "adv")
 ```
 All summary statistic variables
 ```r
-
+sapply(col_num, simplify = FALSE ,function(col_name) {
+ plot_qc(complete_data, variable_col = col_name)
+})
 ```
+---- insert plots qc_plot ----
+
+In order to visualize treatment group QC, `plot_qc_group` is used in the same manner.
+
+```r
+plot_qc_group(main_data, variable_col = "TotalReads"
+```
+---- insert plots qc_plot_group ----
+
+Raincloud plots using the `plot_raincloud` can visualize raw data, probability density and other summary statistics (mean, median, confidence
+intervals) in an understandable and flexible format. It combines dot plots, density plot, and box plots into one.
+
+```r
+plot_raincloud(main_data, "ReadLenTrim")
+```
+will result in the following plot.
+
+---- insert raincloud ----
+
+## aDNA damage verifivation
+
+Using the [mapDamage](https://ginolhac.github.io/mapDamage/) tool for accessing aDNA damage,
+
 
