@@ -153,15 +153,16 @@ plot_mapDamage(main_data)
 
 ### mapDamage parameters used for validating aDNA damage
 
-**Lambda**, the probability of termating an overhang. \n
-**DeltaD**, the cytosine deamination probability in double strand context. \n
-**DeltaS**, the cytosine deamination probability in single strand context. \n
-**Theta**, the mean difference rate between the reference and the sequenced sample not due to DNA damage. \n
+**Lambda**, the probability of termating an overhang.  
+**DeltaD**, the cytosine deamination probability in double strand context.  
+**DeltaS**, the cytosine deamination probability in single strand context.  
+**Theta**, the mean difference rate between the reference and the sequenced sample not due to DNA damage.  
 
-![mapDamage_parameter-Lambda](https://github.com/user-attachments/assets/23eb2c68-15b4-48f0-af07-8e6e2ba46f18)
-![mapDamage_parameter-Lambda](https://github.com/user-attachments/assets/40902fa3-4d3b-445b-9d81-2022e45e4fa6)
-![mapDamage_parameter-Lambda](https://github.com/user-attachments/assets/db3ff5d9-0bc5-4522-a9b5-a155ea459dab)
-![mapDamage_parameter-Lambda](https://github.com/user-attachments/assets/024d00dd-c16d-4dbb-827b-aeb9372f382a)
+![plot_mapDamage_param-Lambda](https://github.com/user-attachments/assets/931921e3-d3f2-4530-a56d-93bc30351e65)
+![plot_mapDamage_param-DeltaD](https://github.com/user-attachments/assets/b5483492-5993-4892-b078-31266269dc37)
+![plot_mapDamage_param-DeltaS](https://github.com/user-attachments/assets/a22c8992-a9d2-42fb-9551-d045e5001f4a)
+![plot_mapDamage_param-Theta](https://github.com/user-attachments/assets/17745535-ee25-4dd5-b68a-8f307357b6b6)
+
 
 
 
