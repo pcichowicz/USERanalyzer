@@ -114,8 +114,8 @@ sapply(col_num, simplify = FALSE ,function(col_name) {
 })
 ```
 <div>
-  <img valign=top align=left src="https://github.com/user-attachments/assets/8b053865-692c-446c-b134-cbb8f0706767" width=50% >
-  <img valign=top align=right src="https://github.com/user-attachments/assets/1c08533b-13ec-4b07-b688-63147809aced" width=50% >  
+  <img src="https://github.com/user-attachments/assets/8b053865-692c-446c-b134-cbb8f0706767" width=50% style="display:inline-block;" >
+  <img src="https://github.com/user-attachments/assets/1c08533b-13ec-4b07-b688-63147809aced" width=50% style="display:inline-block;">  
 </div>
 
 
