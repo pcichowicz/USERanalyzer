@@ -125,7 +125,7 @@ plot_qc_group(main_data, variable_col = "TotalReads"
 ```
 
 <div>
-<img scr="https://github.com/user-attachments/assets/61b12b64-a5db-4134-a6e1-6526519c5ebe" width=98%>
+<img src="https://github.com/user-attachments/assets/61b12b64-a5db-4134-a6e1-6526519c5ebe" width=98%>
 </div>
 
 
@@ -158,11 +158,17 @@ plot_mapDamage(main_data)
 ### mapDamage parameters used for validating aDNA damage
 
 **Lambda**, the probability of termating an overhang.  
-**DeltaD**, the cytosine deamination probability in double strand context.  
-**DeltaS**, the cytosine deamination probability in single strand context.  
 **Theta**, the mean difference rate between the reference and the sequenced sample not due to DNA damage.  
 
-![plot_mapDamage_param-Lambda](https://github.com/user-attachments/assets/931921e3-d3f2-4530-a56d-93bc30351e65)
-![plot_mapDamage_param-DeltaD](https://github.com/user-attachments/assets/b5483492-5993-4892-b078-31266269dc37)
-![plot_mapDamage_param-DeltaS](https://github.com/user-attachments/assets/a22c8992-a9d2-42fb-9551-d045e5001f4a)
-![plot_mapDamage_param-Theta](https://github.com/user-attachments/assets/17745535-ee25-4dd5-b68a-8f307357b6b6)
+<div>
+<img src="https://github.com/user-attachments/assets/931921e3-d3f2-4530-a56d-93bc30351e65" width=49%>
+<img src="https://github.com/user-attachments/assets/17745535-ee25-4dd5-b68a-8f307357b6b6" width=49%>
+</div>
+
+**DeltaD**, the cytosine deamination probability in double strand context.  
+**DeltaS**, the cytosine deamination probability in single strand context.  
+
+<div>
+<img src="https://github.com/user-attachments/assets/b5483492-5993-4892-b078-31266269dc37" width=49%>
+<img src="https://github.com/user-attachments/assets/a22c8992-a9d2-42fb-9551-d045e5001f4a" width=49%>
+</div>
