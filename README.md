@@ -113,9 +113,11 @@ sapply(col_num, simplify = FALSE ,function(col_name) {
  plot_qc(complete_data, variable_col = col_name)
 })
 ```
+<div>
+  <img src="https://github.com/user-attachments/assets/8b053865-692c-446c-b134-cbb8f0706767" width=50% >
+  <img src="https://github.com/user-attachments/assets/1c08533b-13ec-4b07-b688-63147809aced" width=50% >  
+</div>
 
-<img src="https://github.com/user-attachments/assets/8b053865-692c-446c-b134-cbb8f0706767" width=50% >
-<img src="https://github.com/user-attachments/assets/1c08533b-13ec-4b07-b688-63147809aced" width=50% >
 
 
 ![plot_qc-ReadLenTrim](https://github.com/user-attachments/assets/8b053865-692c-446c-b134-cbb8f0706767)
