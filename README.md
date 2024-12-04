@@ -153,7 +153,13 @@ plot_mapDamage(main_data, "sample_1")
 # All samples store in list object and can access them by indexing
 plot_mapDamage(main_data)
 ```
-![plot_mapDamage](https://github.com/user-attachments/assets/6460b17e-b6d7-420a-9483-250e76ef73eb)
+![plot_mapDamage-Sample1](https://github.com/user-attachments/assets/2c0c1465-2748-40f5-9cbd-d2217df69305)
+
+<div>
+<img src="https://github.com/user-attachments/assets/3f0a5392-4803-4857-98d1-f31e9b51f1b6" width = 49%>
+  
+</div>
+
 
 ### mapDamage parameters used for validating aDNA damage
 
