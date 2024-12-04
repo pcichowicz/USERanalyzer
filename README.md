@@ -114,8 +114,8 @@ sapply(col_num, simplify = FALSE ,function(col_name) {
 })
 ```
 <div>
-  <img src="https://github.com/user-attachments/assets/8b053865-692c-446c-b134-cbb8f0706767" width=45% style="display:inline-block;">
-  <img src="https://github.com/user-attachments/assets/1c08533b-13ec-4b07-b688-63147809aced" width=45% style="display:inline-block;">  
+  <img src="https://github.com/user-attachments/assets/8b053865-692c-446c-b134-cbb8f0706767" width=48%">
+  <img src="https://github.com/user-attachments/assets/1c08533b-13ec-4b07-b688-63147809aced" width=48%">  
 </div>
 
 In order to visualize treatment group QC, `plot_qc_group` is used in the same manner.
@@ -123,7 +123,10 @@ In order to visualize treatment group QC, `plot_qc_group` is used in the same ma
 ```r
 plot_qc_group(main_data, variable_col = "TotalReads"
 ```
-![plot_qc_group-ReadLenTrim](https://github.com/user-attachments/assets/61b12b64-a5db-4134-a6e1-6526519c5ebe)
+
+<div>
+<img scr="https://github.com/user-attachments/assets/61b12b64-a5db-4134-a6e1-6526519c5ebe" width=98%>
+</div>
 
 
 Raincloud plots using the `plot_raincloud` can visualize raw data, probability density and other summary statistics (mean, median, confidence
