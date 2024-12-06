@@ -63,6 +63,7 @@ plot_mapDamage <- function(dataframe_data,
       filter(pos == 1) %>%
       select(Treatment, C_T5p, G_A3p)
 
+    anno_lab_values <- annotate_label(annotate_df = anno_df)
     y_limit <- y_limit[[sample_id]]
 
     pos1_diff <- split_samples[[sample_id]]
@@ -122,7 +123,7 @@ plot_mapDamage <- function(dataframe_data,
                       pull(C_T5p) + anno_df %>%
                       filter(Treatment == "U_2.5") %>%
                       pull(C_T5p)) / 2,
-               label = round(((anno_df[["C_T5p"]][3] - anno_df[["C_T5p"]][1]) / anno_df[["C_T5p"]][3]) * 100, digits = 1)
+               label = round(anno_lab_values$C_T5p$E_2.5,digits = 1)
                ) +
       annotate("text",
                x = 6,
@@ -131,7 +132,7 @@ plot_mapDamage <- function(dataframe_data,
                       pull(C_T5p) + anno_df %>%
                       filter(Treatment == "U_10") %>%
                       pull(C_T5p)) / 2,
-              label = round(((anno_df[["C_T5p"]][3] - anno_df[["C_T5p"]][2]) / anno_df[["C_T5p"]][3]) * 100, digits = 1)) +
+              label = round(anno_lab_values$C_T5p$E_10, digits = 1)) +
       theme_classic() +
       scale_x_continuous(
         limits = c(1,25),
@@ -143,7 +144,10 @@ plot_mapDamage <- function(dataframe_data,
       theme(legend.position = "none",
             axis.title.x = element_text(size = 15, margin = margin(12,0,0,0)),
             axis.text.x = element_text(
-              angle = 90),
+              angle = 90,
+              vjust = 0.5,
+              size = 8
+              ),
             axis.title.y = element_text(size = 15, margin = margin(0,12,0,0)),
             axis.text.y = ggtext::element_markdown()
       ) +
@@ -169,7 +173,9 @@ plot_mapDamage <- function(dataframe_data,
             axis.title.x = element_text(size = 15, margin = margin(12,0,0,0)),
             axis.title.y = element_text(size = 15, margin = margin(0,0,0,-12)),
             # axis.text.y = ggtext::element_markdown(),
-            axis.text.x = element_text(angle = 90)
+            axis.text.x = element_text(angle = 90,
+                                       size = 8,
+                                       vjust = 0.5)
             ) +
       scale_x_reverse(breaks = c(seq(1,25, by = 1))
                       ) +
@@ -221,7 +227,7 @@ plot_mapDamage <- function(dataframe_data,
                       pull(G_A3p) + anno_df %>%
                       filter(Treatment == "U_2.5") %>%
                       pull(G_A3p)) / 2,
-               label = round(((anno_df[["G_A3p"]][3] - anno_df[["G_A3p"]][1]) / anno_df[["G_A3p"]][3]) * 100, digits = 1)
+               label = round(anno_lab_values$G_A3p$E_2.5, digits = 1)
       ) +
       annotate("text",
                x = 6,
@@ -230,14 +236,15 @@ plot_mapDamage <- function(dataframe_data,
                       pull(G_A3p) + anno_df %>%
                       filter(Treatment == "U_10") %>%
                       pull(G_A3p)) / 2,
-               label = round(((anno_df[["G_A3p"]][3] - anno_df[["G_A3p"]][2]) / anno_df[["G_A3p"]][3]) * 100, digits = 1)
+               label = round(anno_lab_values$G_A3p$E_10, digits = 1)
       )
 
     # Merge both 5 and 3 prime ggplots together
     combine_plot <- plot_grid(C_T, G_A,
                               align = "h",
                               axis = "tb",
-                              rel_heights = c(1,1))
+                              rel_heights = c(1,1)
+                              )
 
     return(combine_plot)
 

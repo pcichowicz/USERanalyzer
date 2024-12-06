@@ -43,4 +43,32 @@ compute_density_data <- function(data,
   return(as.data.frame(density_data))
 }
 
+#' utility function to help calculate the treatment differences
+#'
+#' @param annotate_df
+#' @return
+#' @export
 
+annotate_label <- function(annotate_df = anno_df) {
+
+  # create named vectors for values
+  results_diff <- list(
+    C_T5p = list(
+      E_10 = ((annotate_df[annotate_df$Treatment == "E",]$C_T5p -
+                annotate_df[annotate_df$Treatment == "U_10",]$C_T5p) /
+        annotate_df[annotate_df$Treatment == "E",]$C_T5p) * 100,
+      E_2.5 = ((annotate_df[annotate_df$Treatment == "E",]$C_T5p -
+                 annotate_df[annotate_df$Treatment == "U_2.5",]$C_T5p) /
+        annotate_df[annotate_df$Treatment == "E",]$C_T5p) * 100
+    ),
+    G_A3p = list(
+      E_10 = ((annotate_df[annotate_df$Treatment == "E",]$G_A3p -
+                annotate_df[annotate_df$Treatment == "U_10",]$G_A3p) /
+        annotate_df[annotate_df$Treatment == "E",]$G_A3p) * 100,
+      E_2.5 = ((annotate_df[annotate_df$Treatment == "E",]$G_A3p -
+                 annotate_df[annotate_df$Treatment == "U_2.5",]$G_A3p) /
+        annotate_df[annotate_df$Treatment == "E",]$G_A3p) * 100
+    )
+  )
+  return(results_diff)
+}
